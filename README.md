@@ -123,3 +123,8 @@ Untuk mengimpor database, buat atau pilih database bernama `tp_mvc25` di phpMyAd
 # Dokumentasi
 
 - [Video dokumentasi](Dokumentasi/TP8DPBO2526C2.mp4)
+
+
+https://github.com/user-attachments/assets/ec881045-ecc9-436d-9971-71753d3f13f7
+
+
