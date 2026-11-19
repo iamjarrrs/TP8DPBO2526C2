@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Materi Mata Kuliah</title><link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigasi untuk berpindah di antara tiga kelompok data aplikasi. -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class="container">
+    <a class="navbar-brand" href="index.php">Sistem Akademik</a>
+    <div class="navbar-nav"><a class="nav-link" href="index.php">Dosen</a><a class="nav-link" href="index.php?page=courses">Mata Kuliah</a><a class="nav-link active" href="index.php?page=materials">Materi</a></div>
+  </div></nav>
+  <main class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3"><h1>Materi Mata Kuliah</h1><a class="btn btn-primary" href="index.php?page=material-create">Tambah Materi</a></div>
+    {{STATUS_MESSAGE}}
+    <!-- Token baris tabel diisi oleh CourseMaterialView. -->
+    <div class="table-responsive"><table class="table table-striped">
+      <thead><tr><th>No</th><th>Mata Kuliah</th><th>Judul Materi</th><th>Deskripsi</th><th>Aksi</th></tr></thead>
+      <tbody>{{MATERIAL_ROWS}}</tbody>
+    </table></div>
+  </main>
+  <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+</body></html>

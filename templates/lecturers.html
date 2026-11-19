@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dosen</title><link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigasi utama berpindah antara data dosen dan mata kuliah. -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class="container">
+    <a class="navbar-brand" href="index.php">Sistem Akademik</a>
+    <div class="navbar-nav"><a class="nav-link active" href="index.php">Dosen</a><a class="nav-link" href="index.php?page=courses">Mata Kuliah</a><a class="nav-link" href="index.php?page=materials">Materi</a></div>
+  </div></nav>
+  <main class="container my-4">
+    <h1>Daftar Dosen</h1><p class="text-muted">Data dosen menjadi induk relasi untuk mata kuliah.</p>
+    <!-- Pesan status ditampilkan bila operasi penghapusan gagal karena relasi. -->
+    {{STATUS_MESSAGE}}
+    <p><a class="btn btn-primary" href="index.php?page=lecturer-create">Tambah Dosen</a></p>
+    <!-- Token baris diisi oleh LecturerView setelah data di-escape. -->
+    <div class="table-responsive"><table class="table table-striped">
+      <thead><tr><th>No</th><th>Nama</th><th>NIDN</th><th>Telepon</th><th>Tanggal Bergabung</th><th>Aksi</th></tr></thead>
+      <tbody>{{LECTURER_ROWS}}</tbody>
+    </table></div>
+  </main>
+  <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+</body></html>

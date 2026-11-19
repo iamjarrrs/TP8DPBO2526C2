@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{FORM_TITLE}}</title><link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigasi yang sama tersedia di halaman daftar dan formulir. -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class="container">
+    <a class="navbar-brand" href="index.php">Sistem Akademik</a>
+    <div class="navbar-nav"><a class="nav-link" href="index.php">Dosen</a><a class="nav-link" href="index.php?page=courses">Mata Kuliah</a><a class="nav-link" href="index.php?page=materials">Materi</a></div>
+  </div></nav>
+  <main class="container my-4"><h1>{{FORM_TITLE}}</h1>{{ERROR_MESSAGE}}
+    <!-- Form ini menangani tambah dan ubah; controller menentukan action dan nilai awal. -->
+    <form method="post" action="{{FORM_ACTION}}" class="card card-body">
+      <label class="form-label" for="name">Nama Dosen</label><input class="form-control mb-3" id="name" name="name" maxlength="100" required value="{{NAME}}">
+      <label class="form-label" for="nidn">NIDN</label><input class="form-control mb-3" id="nidn" name="nidn" maxlength="20" required value="{{NIDN}}">
+      <label class="form-label" for="phone">Telepon</label><input class="form-control mb-3" id="phone" name="phone" maxlength="20" required value="{{PHONE}}">
+      <label class="form-label" for="join_date">Tanggal Bergabung</label><input class="form-control mb-3" id="join_date" name="join_date" type="date" required value="{{JOIN_DATE}}">
+      <div><button class="btn btn-success" name="save_lecturer">Simpan</button> <a class="btn btn-secondary" href="index.php">Batal</a></div>
+    </form>
+  </main>
+  <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+</body></html>

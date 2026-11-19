@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{FORM_TITLE}}</title><link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigasi global tersedia pada semua halaman aplikasi. -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark"><div class="container">
+    <a class="navbar-brand" href="index.php">Sistem Akademik</a>
+    <div class="navbar-nav"><a class="nav-link" href="index.php">Dosen</a><a class="nav-link" href="index.php?page=courses">Mata Kuliah</a><a class="nav-link" href="index.php?page=materials">Materi</a></div>
+  </div></nav>
+  <main class="container my-4"><h1>{{FORM_TITLE}}</h1>{{ERROR_MESSAGE}}{{LECTURER_WARNING}}
+    <!-- Form mengirim data ke aksi create atau edit yang ditentukan view. -->
+    <form method="post" action="{{FORM_ACTION}}" class="card card-body">
+      <label class="form-label" for="code">Kode Mata Kuliah</label><input class="form-control mb-3" id="code" name="code" maxlength="20" required value="{{CODE}}">
+      <label class="form-label" for="name">Nama Mata Kuliah</label><input class="form-control mb-3" id="name" name="name" maxlength="120" required value="{{NAME}}">
+      <label class="form-label" for="credits">Jumlah SKS</label><input class="form-control mb-3" id="credits" name="credits" type="number" min="1" max="6" required value="{{CREDITS}}">
+      <!-- Nilai lecturer_id menyimpan relasi ke primary key dosen. -->
+      <label class="form-label" for="lecturer_id">Dosen Pengampu</label><select class="form-select mb-3" id="lecturer_id" name="lecturer_id" required>{{LECTURER_OPTIONS}}</select>
+      <div><button class="btn btn-success" name="save_course" {{DISABLED}}>Simpan</button> <a class="btn btn-secondary" href="index.php?page=courses">Batal</a></div>
+    </form>
+  </main>
+  <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+</body></html>
