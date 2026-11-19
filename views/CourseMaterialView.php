@@ -42,7 +42,6 @@ class CourseMaterialView
         $template->replace('COURSE_OPTIONS', $options);
         $template->replace('TITLE', e($material['title'] ?? ''));
         $template->replace('DESCRIPTION', e($material['description'] ?? ''));
-        $template->replace('RESOURCE_URL', e($material['resource_url'] ?? ''));
         $template->replace('ERROR_MESSAGE', $error ? '<div class="alert alert-danger">' . e($error) . '</div>' : '');
         $template->replace('COURSE_WARNING', $courses ? '' : '<div class="alert alert-warning">Tambahkan mata kuliah terlebih dahulu.</div>');
         $template->replace('DISABLED', $courses ? '' : 'disabled');

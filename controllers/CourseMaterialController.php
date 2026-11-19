@@ -72,12 +72,11 @@ class CourseMaterialController
             $courseId = filter_var($_POST['course_id'] ?? '', FILTER_VALIDATE_INT);
             $title = trim($_POST['title'] ?? '');
             $description = trim($_POST['description'] ?? '');
-            $url = trim($_POST['resource_url'] ?? '');
-            $urlScheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
-            $validUrl = $url === '' || (filter_var($url, FILTER_VALIDATE_URL) && in_array($urlScheme, ['http', 'https'], true));
+            // Kolom resource_url pada database tetap ada untuk kompatibilitas, tetapi form tidak memakainya.
+            $url = '';
 
-            // Pastikan relasi mata kuliah benar dan URL kosong atau berformat URL.
-            if ($courseId && $this->course->getCourse($courseId) && $title !== '' && $description !== '' && $validUrl) {
+            // Pastikan relasi mata kuliah benar dan isian materi lengkap.
+            if ($courseId && $this->course->getCourse($courseId) && $title !== '' && $description !== '') {
                 $this->material->save($id, $courseId, $title, $description, $url);
                 $this->material->close();
                 $this->course->close();
@@ -85,7 +84,7 @@ class CourseMaterialController
                 exit;
             }
 
-            $error = 'Lengkapi mata kuliah, judul, dan deskripsi. Tautan harus berupa URL yang valid.';
+            $error = 'Lengkapi mata kuliah, judul, dan deskripsi.';
             $material = ['course_id' => $courseId ?: 0, 'title' => $title, 'description' => $description, 'resource_url' => $url];
         }
 

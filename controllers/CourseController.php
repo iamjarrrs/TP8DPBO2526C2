@@ -59,23 +59,36 @@ class CourseController
             header('Location: index.php?page=courses');
             exit;
         }
-        $lecturers = $this->lecturer->getLecturers();
+        $this->lecturer->getLecturers();
+        $lecturers = array();
+        while ($row = $this->lecturer->getResult()) {
+            array_push($lecturers, $row);
+        }
         $error = null;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $code = trim($_POST['code'] ?? '');
             $name = trim($_POST['name'] ?? '');
-            $credits = filter_input(INPUT_POST, 'credits', FILTER_VALIDATE_INT);
-            $lecturerId = filter_input(INPUT_POST, 'lecturer_id', FILTER_VALIDATE_INT);
+            // Baca langsung dari POST agar validasi tetap bekerja konsisten di berbagai konfigurasi PHP.
+            $credits = filter_var($_POST['credits'] ?? '', FILTER_VALIDATE_INT);
+            $lecturerId = filter_var($_POST['lecturer_id'] ?? '', FILTER_VALIDATE_INT);
             // Cek rentang SKS dan pastikan dosen yang dipilih ada di database.
             if ($code !== '' && $name !== '' && $credits >= 1 && $credits <= 6 && $lecturerId && $this->lecturer->getLecturer($lecturerId)) {
-                $this->course->save($id, $code, $name, $credits, $lecturerId);
-                $this->course->close();
-                $this->lecturer->close();
-                header('Location: index.php?page=courses');
-                exit;
+                try {
+                    $this->course->save($id, $code, $name, $credits, $lecturerId);
+                    $this->course->close();
+                    $this->lecturer->close();
+                    header('Location: index.php?page=courses');
+                    exit;
+                } catch (mysqli_sql_exception $exception) {
+                    error_log('Gagal menyimpan mata kuliah: ' . $exception->getMessage());
+                    $error = $exception->getCode() === 1062
+                        ? 'Kode mata kuliah sudah digunakan. Gunakan kode yang berbeda.'
+                        : 'Mata kuliah gagal disimpan. Periksa kembali data dan konfigurasi database.';
+                }
+            } else {
+                $error = 'Periksa kembali semua isian. SKS harus 1–6 dan dosen harus dipilih.';
             }
-            $error = 'Periksa kembali semua isian. SKS harus 1–6 dan dosen harus dipilih.';
             $course = ['code' => $code, 'name' => $name, 'credits' => $credits ?: 1, 'lecturer_id' => $lecturerId ?: 0];
         }
 

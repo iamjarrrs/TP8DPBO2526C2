@@ -16,7 +16,6 @@
       <label class="form-label" for="course_id">Mata Kuliah</label><select class="form-select mb-3" id="course_id" name="course_id" required>{{COURSE_OPTIONS}}</select>
       <label class="form-label" for="title">Judul Materi</label><input class="form-control mb-3" id="title" name="title" maxlength="150" required value="{{TITLE}}">
       <label class="form-label" for="description">Deskripsi</label><textarea class="form-control mb-3" id="description" name="description" rows="4" required>{{DESCRIPTION}}</textarea>
-      <label class="form-label" for="resource_url">Tautan Materi (opsional)</label><input class="form-control mb-3" id="resource_url" name="resource_url" type="url" maxlength="255" value="{{RESOURCE_URL}}" placeholder="https://...">
       <div><button class="btn btn-success" name="save_material" {{DISABLED}}>Simpan</button> <a class="btn btn-secondary" href="index.php?page=materials">Batal</a></div>
     </form>
   </main>
